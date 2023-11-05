@@ -69,6 +69,6 @@ iced_graphics = { git = "https://github.com/iced-rs/iced.git", rev = "a53fa91e0d
 # iced_wgpu = { git = "https://github.com/iced-rs/iced.git", rev = "a53fa91e0ddf374bbeb66d5e831b79127ed47a9d", optional = true }
 iced_glow = { git = "https://github.com/iced-rs/iced.git", rev = "a53fa91e0ddf374bbeb66d5e831b79127ed47a9d", optional = true }
 keyboard-types = { version = "0.6.1", default-features = false }
-baseview = { git = "https://github.com/RustAudio/baseview.git" }
+baseview = { git = "https://github.com/RustAudio/baseview.git", rev = "1d9806d5bd92275d0d8142d9c9c90198757b9b25" }
 copypasta = "0.7.1"
 raw-window-handle = "0.4.2"
