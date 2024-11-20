@@ -9,7 +9,7 @@ use iced_graphics::Viewport;
 use iced_native::clipboard::Clipboard as IcedClipboard;
 use iced_native::event::Status;
 use iced_native::user_interface::{self, UserInterface};
-use iced_native::{clipboard, Command, Debug, Executor, Runtime, Size};
+use iced_native::{clipboard, renderer, Command, Debug, Executor, Runtime, Size, Theme};
 use mpsc::SendError;
 use raw_window_handle::{HasRawWindowHandle, RawWindowHandle};
 use std::cell::RefCell;
@@ -351,27 +351,6 @@ impl<A: Application + 'static + Send> IcedWindow<A> {
         WindowHandle::new(bv_handle, sender)
     }
 
-    /// Open a new window as if it had a parent window.
-    ///
-    /// * `settings` - The settings of the window.
-    pub fn open_as_if_parented(
-        #[allow(unused_mut)] mut settings: Settings<A::Flags>,
-    ) -> WindowHandle<A::Message> {
-        Self::update_gl_context(&mut settings);
-
-        let (sender, receiver) = mpsc::unbounded();
-        let sender_clone = sender.clone();
-
-        let bv_handle = Window::open_as_if_parented(
-            Self::clone_window_options(&settings.window),
-            move |window: &mut baseview::Window<'_>| -> IcedWindow<A> {
-                IcedWindow::new(window, settings, sender_clone, receiver)
-            },
-        );
-
-        WindowHandle::new(bv_handle, sender)
-    }
-
     /// Open a new window that blocks the current thread until the window is destroyed.
     ///
     /// * `settings` - The settings of the window.
@@ -687,8 +666,12 @@ async fn run_instance<A, E>(
                 }
 
                 debug.draw_started();
-                let new_mouse_interaction =
-                    user_interface.draw(&mut renderer, state.cursor_position());
+                let new_mouse_interaction = user_interface.draw(
+                    &mut renderer,
+                    &Theme::default(),
+                    &renderer::Style::default(),
+                    state.cursor_position(),
+                );
                 debug.draw_finished();
 
                 if new_mouse_interaction != mouse_interaction {
@@ -727,8 +710,12 @@ async fn run_instance<A, E>(
                     debug.layout_finished();
 
                     debug.draw_started();
-                    let new_mouse_interaction = user_interface
-                        .draw(&mut renderer, state.cursor_position());
+                    let new_mouse_interaction = user_interface.draw(
+                        &mut renderer,
+                        &Theme::default(),
+                        &renderer::Style::default(),
+                        state.cursor_position(),
+                    );
 
                     if new_mouse_interaction != mouse_interaction {
                         // TODO: Handle mouse cursor icons
@@ -939,7 +926,9 @@ pub fn run_command<Message: 'static + std::fmt::Debug + Send, E: Executor>(
                     height: _height,
                 } => {}
                 window::Action::Move { x: _x, y: _y } => {}
+                _ => (),
             },
+            _ => (),
         }
     }
 }

@@ -13,10 +13,9 @@
 //!
 //! These widgets have their own module with a `State` type. For instance, a
 //! [`TextInput`] has some [`text_input::State`].
-pub use crate::backend::widget::{
-    button, checkbox, container, pane_grid, pick_list, progress_bar, radio,
-    rule, scrollable, slider, text_input, toggler, tooltip, Column, Row, Space,
-    Text,
+pub use iced::widget::{
+    button, checkbox, container, pane_grid, pick_list, progress_bar, radio, rule, scrollable,
+    slider, text_input, toggler, tooltip, Column, Row, Space, Text,
 };
 
 #[cfg(any(feature = "wgpu_canvas", feature = "glow_canvas"))]
@@ -50,10 +49,11 @@ pub mod svg {
 
 #[doc(no_inline)]
 pub use {
-    button::Button, checkbox::Checkbox, container::Container, image::Image,
-    pane_grid::PaneGrid, pick_list::PickList, progress_bar::ProgressBar,
-    radio::Radio, rule::Rule, scrollable::Scrollable, slider::Slider, svg::Svg,
-    text_input::TextInput, toggler::Toggler, tooltip::Tooltip,
+    button::Button, checkbox::Checkbox, container::Container, iced_native::widget::tree,
+    iced_native::widget::tree::Tree, iced_style::theme, iced_style::Theme, image::Image,
+    pane_grid::PaneGrid, pick_list::PickList, progress_bar::ProgressBar, radio::Radio, rule::Rule,
+    scrollable::Scrollable, slider::Slider, svg::Svg, text_input::TextInput, toggler::Toggler,
+    tooltip::Tooltip,
 };
 
 #[cfg(any(feature = "wgpu_canvas", feature = "glow_canvas"))]

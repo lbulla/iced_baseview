@@ -1,12 +1,12 @@
+use baseview::WindowScalePolicy;
 use iced_graphics::Viewport;
 use iced_native::keyboard::Modifiers as IcedModifiers;
 use iced_native::Debug;
+use iced_native::{Color, Point, Size};
 use keyboard_types::Modifiers;
 use std::marker::PhantomData;
 
-use crate::{Application, Color, Point, Size};
-
-use baseview::WindowScalePolicy;
+use crate::Application;
 
 /// The state of a windowed [`Application`].
 #[derive(Debug)]

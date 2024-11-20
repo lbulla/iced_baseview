@@ -1,11 +1,10 @@
-use crate::{
-    Color, Command, Element, Executor, Subscription, WindowQueue, WindowSubs,
-};
-
 use baseview::WindowScalePolicy;
+use iced::Element;
+use iced_native::{Color, Command, Executor, Subscription};
+
+use crate::{WindowQueue, WindowSubs};
 
 mod state;
-
 pub use state::State;
 
 /// An interactive, native cross-platform application.

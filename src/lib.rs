@@ -4,6 +4,7 @@
 //#![forbid(unsafe_code)]
 #![forbid(rust_2018_idioms)]
 
+pub use iced_native;
 #[doc(no_inline)]
 pub use iced_native::*;
 
@@ -40,7 +41,7 @@ pub use iced_wgpu as backend;
 type Renderer = iced_glow::Renderer;
 #[cfg(feature = "glow")]
 #[cfg(not(feature = "wgpu"))]
-type Compositor = iced_glow::window::Compositor;
+type Compositor<Theme = crate::Theme> = iced_glow::window::Compositor<Theme>;
 #[cfg(feature = "glow")]
 #[cfg(not(feature = "wgpu"))]
 pub use iced_glow as backend;

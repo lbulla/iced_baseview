@@ -1,10 +1,8 @@
 //! Access the clipboard.
 
-use std::cell::RefCell;
-
 use copypasta::{ClipboardContext, ClipboardProvider};
-
-use crate::command::{self, Command};
+use iced_native::command::{self, Command};
+use std::cell::RefCell;
 
 pub use iced_native::clipboard::Action;
 
